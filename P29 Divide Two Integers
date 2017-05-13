@@ -1,0 +1,45 @@
+  #need improve #
+  public static int divide(int dividend, int divisor) {
+        int count =0;
+        int countbase=1;
+       
+        int flag=1;
+        if(dividend>Integer.MAX_VALUE) return Integer.MAX_VALUE;
+        if(dividend<Integer.MIN_VALUE) return Integer.MIN_VALUE ;
+        if(dividend<0&&divisor<0){
+            flag=1;
+        }else if((dividend<0&&divisor>0)||(dividend>0&&divisor<0)){
+            flag=0;
+        }
+        
+        
+        long ldividend = dividend;
+        		ldividend =Math.abs(ldividend);
+        long ldivisor = Math.abs(divisor);
+        long  currentDivisor=ldivisor;
+        
+        while(ldividend>=ldivisor){
+        	if(ldividend>=currentDivisor){
+        		ldividend -= currentDivisor;
+        		countbase=Math.abs(countbase);
+        		count += countbase;
+        		
+        		currentDivisor *=2;
+        		
+        		countbase *=2;
+        	}else{
+        		currentDivisor /=2;
+        		
+        		countbase /=2;
+        	}
+        }
+        
+        
+        
+		if(flag==0){
+		    count = - count;
+		}
+		
+		
+		return Math.min(Math.max(-2147483648, count), 2147483647);
+    }
