@@ -1,0 +1,22 @@
+public class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        for (int i =0;i<9;i++){
+            HashSet<Character> rows = new HashSet<Character>();
+            HashSet<Character> cols = new HashSet<Character>();
+            HashSet<Character> cube = new HashSet<Character>();
+            for(int j =0;j<9;j++){
+                if(board[i][j]!='.'&&!rows.add(board[i][j])) return false;
+                if(board[j][i]!='.'&&!cols.add(board[j][i])) return false;
+                int cubexindex=3*(i/3);
+                int cubeyindex=3*(i%3);
+                int cubex = j/3;
+                int cubey = j%3;
+                if(board[cubexindex+cubex][cubeyindex+cubey]!='.'&&!cube.add(board[cubexindex+cubex][cubeyindex+cubey])) return false;
+                
+            }
+        }
+        return true;
+        
+        
+    }
+}
