@@ -1,0 +1,17 @@
+public class Solution {
+    public int jump(int[] nums) {
+        if(nums.length<2) return 0;
+        int i =0,step=0,curmax=0,nextmax=0;
+        while(i<=curmax){
+            while(i<=curmax){
+                nextmax = Math.max(nextmax,i+nums[i]);
+                i++;
+            }
+            curmax=nextmax;
+            step++;
+            if(curmax>=nums.length-1) return step;
+        }
+        
+        return 0;
+    }
+}
