@@ -1,0 +1,33 @@
+/**
+ * Definition for an interval.
+ * public class Interval {
+ *     int start;
+ *     int end;
+ *     Interval() { start = 0; end = 0; }
+ *     Interval(int s, int e) { start = s; end = e; }
+ * }
+ */
+public class Solution {
+    public List<Interval> merge(List<Interval> intervals) {
+        List<Interval> res= new LinkedList<Interval>();
+        if(intervals==null) return res;
+        int[] start = new int[intervals.size()];
+        int[] end = new int[intervals.size()];
+        for(int i =0 ; i<intervals.size();i++){
+            start[i]= intervals.get(i).start;
+            end[i] = intervals.get(i).end;
+        }
+        Arrays.sort(start);
+        Arrays.sort(end);
+        int i =0;
+        while(i<intervals.size()){
+            int st= start[i];
+            while(i<intervals.size()-1&&start[i+1]<=end[i]) i++;//对比当前终点和下一个起点，如果overlap，i++
+            int en =end[i];
+            Interval in = new Interval(st,en);
+            res.add(in);
+            i++;
+        }
+        return res;
+    }
+}
