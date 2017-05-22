@@ -1,0 +1,6 @@
+    public int lengthOfLastWord(String s) {
+	s = s.trim();
+    int lastIndex = s.lastIndexOf(' ') + 1;
+    //If the string include zero ' ' the index of s.lastIndexOf(' ') is -1; the lastIndexOf element which doesn't exist is -1;
+    return s.length() - lastIndex;        
+}
