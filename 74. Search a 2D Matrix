@@ -1,0 +1,59 @@
+public class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+       if(matrix.length<1||matrix[0].length<1){
+           return false;
+       }
+        
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int row =rowFind(matrix,m,n,target);
+        return colFind(matrix,row,n,target);
+
+    }
+
+    
+    private static int rowFind(int[][] matrix, int m,int n,int target){
+        int high = 0;
+        int low = m-1;
+        while(low>=high){
+            int mid = (high+low)/2;
+            if(matrix[mid][0]<=target&&matrix[mid][n-1]>=target){
+                return mid;
+            }else if(matrix[mid][0]>target){
+                low=mid-1;
+            }else if(matrix[mid][n-1]<target){
+                high=mid+1;
+            }else{
+                return -1;
+            }
+            
+        }
+		return -1;
+        
+    }
+    
+    private static boolean colFind(int[][] matrix, int row,int n,int target){
+        if(row==-1){
+            return false;
+        }
+    int high = 0;
+    int low = n-1;
+    while(low>=high){
+        int mid = (high+low)/2;
+        if(target==matrix[row][mid]){
+            return true;
+        }else if(matrix[row][mid]>target){
+            low=mid-1;
+        }else if(matrix[row][mid]<target){
+            high=mid+1;
+        }else{
+            return false;
+        }
+        
+    }
+	return false;
+    
+}
+
+    
+}
