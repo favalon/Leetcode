@@ -1,0 +1,26 @@
+public class Solution {
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        if(n<=0||k<=0||k>n){
+            return result;
+        }
+        
+        List<Integer> list = new ArrayList<Integer>();
+        this.helper(1,n,k,list,result);
+        
+        return result;
+        
+    }
+    
+    private void helper(int start,int n,int k,List<Integer> list,List<List<Integer>> res){
+        if(k==0){
+            res.add(new ArrayList<Integer>(list));
+            return;
+        }
+        for(int i =start;i<=n;i++){
+            list.add(i);
+            this.helper(i+1,n,k-1,list,res);
+            list.remove(list.size()-1);
+        }
+    }
+}
