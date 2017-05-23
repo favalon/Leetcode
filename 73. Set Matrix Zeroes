@@ -1,0 +1,68 @@
+	public class Solution {
+	    public void setZeroes(int[][] matrix) {
+	        if ( matrix ==null){
+	            return;
+	        }
+	        boolean firstrowZero= false;
+	        boolean firstcolumnZero = false;
+	        int m = matrix.length;
+	        int n = matrix[0].length;
+	        for(int i =0;i<m;i++){
+	            if(matrix[i][0]==0){
+	                firstcolumnZero = true;
+	                break;
+	            }
+	        }
+	         for(int i =0;i<n;i++){
+	            if(matrix[0][i]==0){
+	                firstrowZero = true;
+	                break;
+	            }
+	        }
+	        
+	        for(int i =1;i<m;i++){
+	            for(int j =1;j<n;j++){
+	                if(matrix[i][j]==0){
+	                    matrix[0][j]=0;
+	                    matrix[i][0]=0;
+	                }
+	            }
+	        }
+	        
+	        
+	        for(int i =1;i<m;i++){
+	            if(matrix[i][0]==0){
+	                nullRow(matrix,i,m,n);
+	            }
+	            
+	        }
+	        for(int j =1;j<n;j++){
+	            if(matrix[0][j]==0){
+	                nullCol(matrix,j,m,n);
+	            }
+	            
+	        }
+	        
+	        if(firstrowZero){
+	            for(int i =0;i<n;i++){
+	                matrix[0][i]=0;
+	            }
+	        }
+	       if(firstcolumnZero){
+	            for(int i =0;i<m;i++){
+	                matrix[i][0]=0;
+	            }
+	        }
+	    }
+	    
+	    private void nullRow(int[][] matrix, int i,int m,int n){
+	        for(int col=0; col<n; col++){
+	            matrix[i][col]=0;
+	        }
+	    }
+	    private void nullCol(int[][] matrix, int j,int m,int n){
+	         for(int row=0; row<m; row++){
+	            matrix[row][j]=0;
+	        }
+	    }
+	}
