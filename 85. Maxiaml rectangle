@@ -1,0 +1,44 @@
+public class Solution {
+    public int maximalRectangle(char[][] matrix) {
+        if(matrix==null||matrix.length==0||matrix[0].length==0) return 0;
+        
+        
+        
+        int temp[] = new int[matrix[0].length];
+        Stack<Integer> s = new Stack<Integer>();
+        int maxArea = 0;
+        int area = 0;
+        for(int index = 0;index< matrix.length;index++){
+            for(int col = 0 ; col <matrix[0].length;col++){
+                if(matrix[index][col]=='1'){
+                    temp[col]+=1;
+                }else{
+                    temp[col]=0;
+                }
+            }
+            area = maxRectangleInHistogram(temp);
+            if(area>maxArea){
+                maxArea=area;
+            }
+        }
+        return maxArea;
+        
+    }
+    
+    private int maxRectangleInHistogram(int[] heights){
+        Stack<Integer> stack = new Stack<Integer>();
+        int maxArea =0;
+        int area = 0;
+        int i =0,n=heights.length;
+        while(i<n){
+            while(!stack.isEmpty()&&heights[i]<heights[stack.peek()]){
+                maxArea = Math.max(maxArea,heights[stack.pop()]*(i-(stack.isEmpty()?0:stack.peek()+1)));
+            }
+            stack.push(i++);
+        }
+        while(!stack.isEmpty()){
+            maxArea = Math.max(maxArea,heights[stack.pop()]*(i-(stack.isEmpty()?0:stack.peek()+1)));
+        }
+        return maxArea;
+    }
+}
