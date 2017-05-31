@@ -1,0 +1,21 @@
+public class Solution {
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        List<Integer> curres = new LinkedList<Integer>();
+        pathSum(root,sum,curres,res);
+        return res;
+    }
+    private void pathSum(TreeNode root,int sum,List<Integer> curres,List<List<Integer>> res){
+        if(root==null) return;
+        curres.add(new Integer(root.val));
+        if(root.left==null&&root.right==null&&sum==root.val){
+            res.add(new LinkedList(curres));
+            curres.remove(curres.size()-1);//remove the last integer
+            return;
+        }else{
+            pathSum(root.left,sum-root.val,curres,res);
+            pathSum(root.right,sum-root.val,curres,res);
+        }
+        curres.remove(curres.size()-1);
+    }
+}
