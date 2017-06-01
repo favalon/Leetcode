@@ -1,0 +1,23 @@
+public class Solution {
+    public void connect(TreeLinkNode root) {
+        TreeLinkNode dummyHead = new TreeLinkNode(0);
+        TreeLinkNode pre = dummyHead;
+        
+        while(root!=null){
+            if(root.left!=null){
+                pre.next=root.left;
+                pre=pre.next
+            }
+            if(root.right!=null){
+                pre.next=root.right;
+                pre=pre.next;
+            }
+            root=root.next;
+            if(root==null){
+                pre=dummyHead;//pointer pre back to the link head
+                root=dummyHead.next; //this dummyHead.next is the fisrt pre next which is root.left/root.right which will be the start pointer for the next level.
+                dummyHead.next=null;//set the dummy.next back to null
+            }
+        }
+    }
+}
