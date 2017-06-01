@@ -1,0 +1,35 @@
+public class Solution {
+    public int maxProfit(int[] prices) {
+        int maxCur = 0, maxSoFar = 0;
+        for(int i = 1; i < prices.length; i++) {
+            maxCur = Math.max(0, maxCur += prices[i] - prices[i-1]);
+            maxSoFar = Math.max(maxCur, maxSoFar);
+        }
+        return maxSoFar;
+    }
+}
+
+public class Solution {
+    public int maxProfit(int[] prices) {
+        int total = 0;
+        for(int i =0;i<prices.length-1;i++){
+            if(prices[i+1]>prices[i]) total+=prices[i+1]-prices[i];
+        }
+        return total;
+    }
+}
+
+public class Solution {
+    public int maxProfit(int[] prices) {
+        int hold1 =Integer.MIN_VALUE, hold2=Integer.MIN_VALUE;
+        int release1 = 0, release2=0;
+        for(i:prices){
+            release2=Math.max(release2,hold2+i);//hold2是第二次买入是能达到最大的profit，并不是第二次买入的价格，而是利润
+            hold2=Math.max(hold2,release1-i);//这里取max是因为hold2是计算第二次买入后的最大利润的（刚卖出1，买入2），这里的例如最大利润意味着realse1达到最大值并使得realse1和当日价格i的差距达到最大才能使得此时利润最大。
+            release1=Math.max(release1,hold1+i);
+            hold1=Math.max(hold1,-i);
+        }
+        
+        return release2;
+    }
+}
