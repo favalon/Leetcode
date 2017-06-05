@@ -1,0 +1,17 @@
+public class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        Stack<TreeNode> rights = new Stack<TreeNode>();
+        List<Integer> list = new LinkedList<Integer>();
+        while(root!=null){
+            list.add(root.val);
+            if(root.right!=null){
+                rights.push(root.right);
+            }
+            root=root.left;
+            if(root==null&&!rights.isEmpty()){
+                root=rights.pop();
+            }
+        }
+        return list;
+    }
+}
