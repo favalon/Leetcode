@@ -7,6 +7,7 @@ public class MinStack {
     }
     
     public void push(int x) {
+    //存入input与min的差值而不是input本身，再与min对比，更新min的值
         if(stack.isEmpty()){
             stack.push(0L);
             min=x;
