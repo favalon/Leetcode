@@ -1,0 +1,23 @@
+public class Solution {
+    public boolean isHappy(int n) {
+        int fast,slow;
+        slow=fast=n;
+        do{//find if the equation become a infinite loop
+            slow=sum(slow);
+            fast=sum(fast);
+            fast=sum(fast);
+            if(fast==1) return true;
+        }while(slow!=fast);
+        return false;
+    }
+    private int sum(int n){
+        int res = 0,tmp;
+        while(n>0){
+            tmp=n%10;
+            n=n/10;
+            res=res+tmp*tmp;
+        }
+        return res;
+    }
+    
+}
